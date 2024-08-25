@@ -1,2 +1,2 @@
 # fight
-gotta fight 'em all
+gotta ~~catch~~ fight 'em all
