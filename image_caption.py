@@ -90,7 +90,7 @@ def get_image_generation(image_description, output_path="output.png"):
         style='vivid',
         response_format='b64_json',
     )
-
+  
     decode_image(response.data[0].b64_json, output_path=output_path)
 
 def get_description_and_img(image_name, image_path):

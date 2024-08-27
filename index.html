@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <img id="background_image" src="assets/wallpaper.jpg" alt="Wallpaper">
     <div class="container-fluid mt-3">
         <h1 id="title">Fight Me</h1>
 
@@ -25,115 +24,63 @@
             <div class="col">
                 <canvas id="game" width="800" height="450"></canvas>
 
-                <button class="btn btn-success" id="start_button" style="font-size: 35px; margin: 0 auto; margin-top: 10px; display: block; justify-content: center;" onclick="start_game()">Start Game</button>
+                <button class="btn btn-success" id="start-button" style="font-size: 35px; margin: 0 auto; margin-top: 10px; display: block; justify-content: center;" onclick="startGame()">Start Game</button>
 
                 <div id="game_description"></div>
-
-                <!-- <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Seated Sinker</h5>
-                        <p class="card-text">Stupid attack description
-                            - Power: 23
-                            - Accuracy: 23%
-                        </p>
-                        <a href="#" class="btn btn-primary">Use</a>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Armrest Artillery</h5>
-                        <p class="card-text">Stupid attack description
-                            - Power: 69
-                            - Accuracy: 30%
-                        </p>
-                        <a href="#" class="btn btn-primary">Use</a>
-                    </div>
-                </div> -->
             </div>
 
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <!-- <h2 class="center_text">You</h2> -->
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title center_text">Create Your Player</h5>
-                                <input type="file" style="width: 300px" id="player_image"/>
-                                <!-- <button class="btn btn-primary" onclick="upload_player_image()" style="margin-top: 5px;">Upload Image</button> -->
-                                <img id="player_image_show" style="width: 300px" alt="Uploaded image will appear here">
+                                <input type="file" style="width: 300px" id="human-image"/>
+                                <img id="human_image_show" style="width: 300px" alt="Uploaded image will appear here">
                             </div>
                         </div>
 
-                        <div class="card" id="your_card" style="display: none;">
-                            <!-- <div class="card" id="ai_description"> -->
-                                <div class="card-body">
-                                    <h5 class="card-title" id="your_name">Stupid Sandals</h5>
-                                    <p class="card-text" id="your_description">
-                                        <b>Description:</b> These sandals are stupid
-                                    </p>
-                                    <p class="card-text" id="your_hp">
-                                        <b>HP:</b> These sandals are stupid
-                                    </p>
-                                    <p class="card-text" id="your_attacks">
-                                        <b>Attacks:</b> Heel Stomp, Toe Jam, Sock Shock
-                                    </p>
-                                </div>
-                            </div>
-<!--
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="assets/bordeaux/32x32_pic.jpg" alt="Card image cap">
+                        <div class="card" id="human-card" style="display: none;">
                             <div class="card-body">
-                              <h5 class="card-title">Bordeaux</h5>
-                              <p class="card-text">Blah Blah Blah</p>
-                              <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                                <label class="form-check-label" for="flexSwitchCheckChecked">Select Wine</label>
-                              </div>
-                              </div>
-                        </div> -->
+                                <h5 class="card-title" id="human-name">Stupid Sandals</h5>
+                                <p class="card-text" id="human-description">
+                                    <b>Description:</b> These sandals are stupid
+                                </p>
+                                <p class="card-text" id="human-hp">
+                                    <b>HP:</b> These sandals are stupid
+                                </p>
+                                <p class="card-text" id="human-attacks">
+                                    <b>Attacks:</b> Heel Stomp, Toe Jam, Sock Shock
+                                </p>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title center_text">Create AI Player</h5>
-                                <input type="file" style="width: 300px" id="ai_image"/>
+                                <input type="file" style="width: 300px" id="ai-image"/>
                                 <!-- <button class="btn btn-primary" onclick="upload_player_image()" style="margin-top: 5px;">Upload Image</button> -->
                                 <img id="ai_image_show" style="width: 300px" alt="Uploaded image will appear here">
                             </div>
                         </div>
 
-                        <div class="card" id="ai_card" style="display: none;">
+                        <div class="card" id="ai-card" style="display: none;">
                         <!-- <div class="card" id="ai_description"> -->
                             <div class="card-body">
-                                <h5 class="card-title" id="ai_name">Stupid Sandals</h5>
-                                <p class="card-text" id="ai_description">
+                                <h5 class="card-title" id="ai-name">Stupid Sandals</h5>
+                                <p class="card-text" id="ai-description">
                                     <b>Description:</b> These sandals are stupid
                                 </p>
-                                <p class="card-text" id="ai_hp">
+                                <p class="card-text" id="ai-hp">
                                     <b>HP:</b> These sandals are stupid
                                 </p>
-                                <p class="card-text" id="ai_attacks">
+                                <p class="card-text" id="ai-attacks">
                                     <b>Attacks:</b> Heel Stomp, Toe Jam, Sock Shock
                                 </p>
                             </div>
                         </div>
-
-
-                        <!-- <h2 class="center_text">AI</h2>
-
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="assets/bordeaux/32x32_pic.jpg" alt="Card image cap">
-                            <div class="card-body">
-                              <h5 class="card-title">Bordeaux</h5>
-                              <p class="card-text">Blah Blah Blah</p>
-                              <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                                <label class="form-check-label" for="flexSwitchCheckChecked">Select Wine</label>
-                              </div>
-                            </div>
-                        </div> -->
-
                     </div>
                 </div>
             </div>
