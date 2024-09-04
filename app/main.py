@@ -3,7 +3,7 @@ import uuid
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from fight.battle import (
+from app.battle import (
     _ai_turn,
     _init_chat,
     _load_pokemon,
@@ -37,7 +37,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 
 ###############################################################################
