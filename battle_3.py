@@ -13,6 +13,11 @@ BASE_URL = "https://api.fireworks.ai/inference/v1"
 MODEL = "accounts/fireworks/models/llama-v3p1-70b-instruct"
 
 
+###############################################################################
+# Helper Functions
+###############################################################################
+
+
 class Attack(BaseModel):
     accuracy: int
     power: int
@@ -47,7 +52,12 @@ def _chat(messages: list[Dict[str, str]], model:str, client: OpenAI, response_mo
     return completion.choices[0].message.content if response_model is None else completion
         
 
-def get_pokemon(client, model, pokemon_description):
+###############################################################################
+# Main Functions
+###############################################################################
+
+
+def get_pokemon(client, model, pokemon_description) -> Pokemon:
     
     # messages
     sp = "You are a helpful assistant with access to functions. You should always use the functions provided. If the user does not specify every parameter, you can be creative. Please make all the parameter incredibly creative and funny. Use your imagination. Do not be overly verbose."
@@ -60,7 +70,7 @@ def get_pokemon(client, model, pokemon_description):
     return pokemon
 
 
-def get_comeback(client: OpenAI, model: str, user_pokemon: Pokemon, ai_pokemon: Pokemon, user_attack_name: str):
+def get_comeback(client: OpenAI, model: str, user_pokemon: Pokemon, ai_pokemon: Pokemon, user_attack_name: str) -> str:
     
     # Initialize user attack
     name_to_attack = {user_pokemon.attack1.name: user_pokemon.attack1, user_pokemon.attack2.name: user_pokemon.attack2, user_pokemon.attack2.name: user_pokemon.attack2}
