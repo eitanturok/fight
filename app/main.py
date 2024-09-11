@@ -1,8 +1,10 @@
+import os
 import uuid
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.battle3 import get_pokemon, select_attack, get_insult, get_comeback
 from app.battle import (
     _ai_turn,
     _init_chat,
@@ -11,10 +13,10 @@ from app.battle import (
     _user_turn,
     get_pokemon,
 )
-from fight.image_caption import get_description_and_img
 
-FIREWORK_BASE_URL = "https://api.fireworks.ai/inference/v1"
-FIREWORK_API_KEY = '<FIREWORK-API-KEY>'
+
+API_KEY = os.environ["FIREWORKS_API_KEY"] # fw_3ZJszLDVoKbcjnAfFTopn7Gw
+BASE_URL = "https://api.fireworks.ai/inference/v1"
 MODEL = "accounts/fireworks/models/llama-v3p1-70b-instruct"
 
 AI_POKEMON_PATH = "ai_pokemon.json"
@@ -46,57 +48,31 @@ app.add_middleware(
 
 @app.post("/get_ai_pokemon")
 async def get_ai_pokemon(input: dict):
-    image_path = input["img_path"]
-    image_id = str(uuid.uuid4())
-
-    # Caption Image, Create new image
-    caption_path, pokemon_image_path = get_description_and_img(image_id, image_path)
-
-    # load image caption
-    with open(caption_path, "r") as f:
-        pokemon_description = f.read()
-
-    client = _init_chat(FIREWORK_BASE_URL, FIREWORK_API_KEY)
-    ai_pokemon = get_pokemon(pokemon_description, MODEL, client)
-    _save_pokemon(AI_POKEMON_PATH, ai_pokemon)
-    return ai_pokemon, pokemon_image_path, caption_path
-
+    client = _init_chat(BASE_URL, API_KEY)
+    return get_pokemon(input["img_path"], AI_POKEMON_PATH, MODEL, client)
 
 
 @app.post("/get_user_pokemon")
 async def get_user_pokemon(input: dict):
-    image_path = input["img_path"]
-    image_id = str(uuid.uuid4())
-
-    # Caption Image, Create new image
-    caption_path, pokemon_image_path = get_description_and_img(image_id, image_path)
-
-    # load image caption
-    with open(caption_path, "r") as f:
-        pokemon_description = f.read()
-
-    client = _init_chat(FIREWORK_BASE_URL, FIREWORK_API_KEY)
-    user_pokemon = get_pokemon(pokemon_description, MODEL, client)
-    _save_pokemon(USER_POKEMON_PATH, user_pokemon)
-    return user_pokemon, pokemon_image_path, caption_path
-
+    client = _init_chat(BASE_URL, API_KEY)
+    return get_pokemon(input["img_path"], USER_POKEMON_PATH, MODEL, client)
 
 @app.post("/ai_turn")
 def ai_turn(input: dict):
     ai_pokemon = _load_pokemon(AI_POKEMON_PATH)
-    user_pokemon = _load_pokemon(USER_POKEMON_PATH)
-    client = _init_chat(FIREWORK_BASE_URL, FIREWORK_API_KEY)
+    client = _init_chat(BASE_URL, API_KEY)
 
-    attack, insult, _ = _ai_turn(ai_pokemon, MODEL, client)
+    attack = select_attack(ai_pokemon)
+    insult = get_insult(MODEL, client, attack)
     return attack, insult
 
 
 @app.post("/user_turn")
 def user_turn(input: dict) -> str:
-    user_attack = input["user_attack"]
+    user_attack_name = input["user_attack"]
     ai_pokemon = _load_pokemon(AI_POKEMON_PATH)
     user_pokemon = _load_pokemon(USER_POKEMON_PATH)
-    client = _init_chat(FIREWORK_BASE_URL, FIREWORK_API_KEY)
-
-    insult, _ = _user_turn(user_attack, user_pokemon, ai_pokemon, MODEL, client)
-    return insult
+    client = _init_chat(BASE_URL, API_KEY)
+    
+    comeback = get_comeback(client, MODEL, user_pokemon, ai_pokemon, user_attack_name)
+    return comeback
