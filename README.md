@@ -5,5 +5,5 @@ gotta ~~catch~~ fight 'em all
 
 Launch the server locally with
 ```bash
-python -m http.server -d fight
+python -m http.server -d app
 ```

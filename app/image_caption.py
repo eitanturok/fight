@@ -1,5 +1,4 @@
 import base64
-from argparse import ArgumentParser
 from io import BytesIO
 
 import openai
@@ -111,14 +110,3 @@ def get_description_and_img(image_name, image_path):
     roundify_image(output_path, output_path=output_path)
 
     return image_description_path, output_path
-
-
-# if __name__ == "__main__":
-#     # Argument Parser
-#     parser = ArgumentParser()
-#     parser.add_argument("--image_path", dest="image_path", required=True, help="Path to the image")
-#     parser.add_argument("--image_name", dest="image_name", required=True, help="Name of the base image")
-#     args = parser.parse_args()
-
-#     get_description_and_img(args.image_name, args.image_path)
-
