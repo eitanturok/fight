@@ -51,7 +51,7 @@ let humanState = {
     ],
     homeOffset: false
 }
-humanState.image.src = '../assets/human.png';
+humanState.image.src = 'assets/human.png';
 
 let aiState = {
     hp: 100,
@@ -103,7 +103,7 @@ let aiState = {
     ],
     homeOffset: true
 }
-aiState.image.src = '../assets/ai.png';
+aiState.image.src = 'assets/ai.png';
 
 let game_started = false;
 let currentFrame = 0;
@@ -111,14 +111,14 @@ let currentFrame = 0;
 let backgroundImages = [];
 for (let i = 0; i < 12; i++) {
     let img = new Image();
-    img.src = '../assets/battle_backgrounds/frame_' + i + '.png';
+    img.src = 'assets/battle_backgrounds/frame_' + i + '.png';
     backgroundImages.push(img);
 }
 
 let explosionImages = [];
 for (let i = 0; i < 6; i++) {
     let img = new Image();
-    img.src = '../assets/explosions/frame_' + i + '.png';
+    img.src = 'assets/explosions/frame_' + i + '.png';
     explosionImages.push(img);
 }
 

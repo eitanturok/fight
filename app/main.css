@@ -9,8 +9,8 @@
 
 @font-face {
     font-family: "PressStart2P";
-        src: url("../assets/PressStart2P.eot");
-        src: url("../assets/PressStart2P.ttf")format("truetype");
+        src: url("assets/PressStart2P.eot");
+        src: url("assets/PressStart2P.ttf")format("truetype");
 }
 
 .btn {
@@ -37,8 +37,8 @@ body {
     font-weight: 400;
     font-style: normal;
     color: #ffffff;
-    background-image: url('../assets/wallpaper.jpg');
-    /* background-image: url('../assets/forest_wallpaper.jpg'); */
+    background-image: url('assets/wallpaper.jpg');
+    /* background-image: url('assets/forest_wallpaper.jpg'); */
     background-size: cover;
     height: 100vh;
     width: 100vw;
@@ -59,7 +59,7 @@ canvas {
     display: block; 
     margin: 0 auto;
     border: 5px solid #282019;
-    /* background-image: url("../assets/battle_background.gif"); */
+    /* background-image: url("assets/battle_background.gif"); */
 }
 
 #title {
