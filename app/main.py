@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.battle3 import get_pokemon, select_attack, get_insult, get_comeback, _load_pokemon
+from app.battle import get_pokemon, select_attack, get_insult, get_comeback, _load_pokemon
 
 
 AI_POKEMON_PATH = "ai_pokemon.json"
